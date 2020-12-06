@@ -1,13 +1,14 @@
 #include <vector>
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
 //增加
 void addVectorData(vector <int> &n, int data)
 {
     //n.insert(n.end(), data);      //向容器尾部插入数据
-    //n.insert(n.begin()+1, data);  //在第一个元素插入数据
-    n.push_back(data);          //向容器尾部插入数据
+    n.insert(n.begin()+1, data);  //在第一个元素插入数据
+    //n.push_back(data);          //向容器尾部插入数据
 
 }
 //删除
@@ -26,7 +27,7 @@ void changeVectorData(vector <int> &n, int oldData, int newData)
        if((*i) == oldData)
             n.erase(i);
     addVectorData(n, newData);
-    
+    sort(n.begin(), n.end());
 }
 //查找
 bool findVectorData(vector <int> &n, int data)
