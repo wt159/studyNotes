@@ -3,7 +3,19 @@
 #include <algorithm>
 using namespace std;
 
-//增加
+//cout
+void priVectorData(vector <int> &n)
+{
+    for(auto i = n.begin(); i != n.end(); i++)
+    {
+        cout << *i << " ";
+    }
+    cout << endl;
+
+    //for(auto e:n)
+     //   cout << e << endl;
+}
+//add 
 void addVectorData(vector <int> &n, int data)
 {
     //n.insert(n.end(), data);      //向容器尾部插入数据
@@ -11,7 +23,7 @@ void addVectorData(vector <int> &n, int data)
     //n.push_back(data);          //向容器尾部插入数据
 
 }
-//删除
+//delete
 void delVectorData(vector <int> &n)
 {
     //n.erase(n.begin()+1);   //删除第一个数据(从0开始)
@@ -19,15 +31,33 @@ void delVectorData(vector <int> &n)
     //n.erase(n.begin()+2, n.begin()+4);  //删除第二个到四个数据
     //n.clear();      //清除整个vector
 }
-//修改
-void changeVectorData(vector <int> &n, int oldData, int newData)
+//change and sort
+void changeVectorData(vector<int> &n, int oldData, int newData)
 {
+#if 1
     vector<int>::iterator i;            //使用迭代器遍历vector
     for( i = n.begin(); i != n.end(); ++i)  
-       if((*i) == oldData)
+    {
+        cout << *i << endl;
+        if((*i) == oldData)
+        {
+            cout << "oldData:" << *i << endl;
             n.erase(i);
+            break;
+        }
+    }
+#else
+    int len = n.size();            
+    for(int i = 0; i <= len; i++)  
+    {
+        if(n[i] == oldData)
+        {
+            n.erase(n.begin()+i);
+        }
+    }
+#endif 
     addVectorData(n, newData);
-    sort(n.begin(), n.end());
+    std::sort(n.begin(), n.end());
 }
 //查找
 bool findVectorData(vector <int> &n, int data)
@@ -41,34 +71,40 @@ bool findVectorData(vector <int> &n, int data)
     }
     return false;   
 }
-//打印
-void priVectorData(vector <int> &n)
+
+//other
+void traserveVector(vector<int> &n)
 {
-    for(auto i = n.begin(); i != n.end(); i++)
+    vector<int>::iterator i;
+    for(i = n.begin(); i != n.end(); i++)
     {
         cout << *i << " ";
     }
     cout << endl;
 
-    //for(auto e:n)
-     //   cout << e << endl;
+    for_each(n.begin(), n.end(), [](int i)->void{cout << i << " ";});
+    cout << endl;
 }
-//其它
-
 
 int main(void)
 {
     vector <int> num = {0,1,2,3};
     priVectorData(num);
+    
     for(int i=4; i<10; i++)
         addVectorData(num, i);
-
     priVectorData(num);
+
     delVectorData(num);
     priVectorData(num);
+    
     changeVectorData(num, 2, 10);
     priVectorData(num);
+    cout << " end " << endl;
+    /*
     cout << findVectorData(num, 4) << endl;
     cout << num.size() << endl;
+    */
+   //traserveVector(num);
     return 0;
 }
