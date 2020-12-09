@@ -15,31 +15,36 @@ typedef std::map<std::string, int> maptype;
 */
 /*
 *知识点：
-*	
-*
+*	1.vector作为函数参数和函数返回值使用
+*	2.形参用引用代替
+*	3.哈希表map的使用
 */
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
         int len = nums.size();
-        vector<int> res;
-		multimap<int, int> temp;
+		map<int, int> map1;
         for(int i=0; i<len; i++)
-        {
-            if(nums[i] != temp.find(nums[i]) && nums[i] <= target)
+        {		
+			if(map1.count(target - nums[i]) != 0)
 			{
-				temp.insert(pair<nums[i], i);
+				return {map1.find(target - nums[i])->second, i};
 			}
-			else if(nums[i] == temp.find(nums[i]))
-			{
-				
-			}
+			map1[nums[i]] = i;
         }
+		return {};
     }
 };
 
 int main(void)
 {
-	cout << "hello xiaoyu" << endl;
+	Solution test;
+	vector<int> a = {2, 7, 11, 15};
+	vector<int> b = test.twoSum(a, 22);
+
+	for(auto s : b)
+		cout << s << " ";
+	cout << endl;
+
 	return 0;
 }
