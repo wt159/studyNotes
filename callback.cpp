@@ -1,25 +1,25 @@
 #include <iostream>
 
-class RTSPCallback
+class B
 {
 public:
-    virtual ~RTSPCallback(){};
+    virtual ~B(){};
     virtual void priCallback() = 0;
 };
-class RTSPStream
+class C
 {
 public:
-    RTSPStream(RTSPCallback *callback);
-    ~RTSPStream();
+    C(B *callback);
+    ~C();
     void showCallback();
 private:
-    RTSPCallback *_callback;
+    B *_callback;
 };
-RTSPStream::RTSPStream(RTSPCallback *callback)
+C::C(B *callback)
 {
     _callback = callback;
 }
-void RTSPStream::showCallback()
+void C::showCallback()
 {
     if(_callback)
     {
@@ -27,33 +27,36 @@ void RTSPStream::showCallback()
     }
 }
 
-class RTSPCameraManager: public RTSPCallback
+class A: public B
 {
 public:
-    RTSPCameraManager(){
+    A(){
         std::cout << "start constructor... " << std::endl;
     }
-    ~RTSPCameraManager(){
+    ~A(){
         std::cout << "end destructor... " << std::endl;
     }
-    RTSPStream* getInstance();
+    C* getInstance();
     void priCallback(void);
 };
-RTSPStream* RTSPCameraManager::getInstance()
+C* A::getInstance()
 {
-    RTSPStream *newStream = new RTSPStream(this);
+    C *newStream = new C(this);
     return newStream;
 }
-void RTSPCameraManager::priCallback(void)
+void A::priCallback(void)
 {
     std::cout << "Calling priCallback suc!" << std::endl;
 }
 
 int main(void)
 {
-    RTSPCameraManager  a;
-    RTSPStream *pStream = a.getInstance();
-    pStream->showCallback();
+    A  a;
+    C *pStream = a.getInstance();
+    if(nullptr != pStream )
+    {
+        pStream->showCallback();
+    }
 
     return 0;
 }

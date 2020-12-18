@@ -1,6 +1,5 @@
 #include <iostream>
 using namespace std;
-
 /*
 知识点：
 	1、右值：
@@ -17,7 +16,6 @@ using namespace std;
 		在创建一个新对象时有一个旧的相同对象需要回收，
 		这时就可以用移动构造函数把就对象直接给新对象
 */
-
 class demo{
 public:
     demo(int x = 0):xptr(new int(x)){
@@ -30,7 +28,6 @@ public:
         n.xptr = nullptr;
         cout << "Calling move constructor..." << *xptr << endl;
     }
-    
     ~demo(){
         delete xptr;
         cout << "destructor..." << endl;
@@ -41,7 +38,6 @@ public:
 private:
     int *xptr;
 };
-
 demo getDemo(){
     demo m(1);
     return m;
@@ -50,14 +46,10 @@ demo getDemo(){
 int main(void)
 {
     demo c(2);
-    cout << c.getNum() << endl;
     demo b = c;
-    cout << b.getNum() << endl;
-    
-
     demo c1(std::move(c));      //移动构造函数
-    cout << c1.getNum() << endl;
 
     //cout << "c:" << c.getNum() << endl;
+
     return 0;
 }
