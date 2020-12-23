@@ -1,5 +1,4 @@
-// move example
-#include <utility>  // std::move
+//#include <utility>  // std::move
 #include <iostream> // std::cout
 #include <vector>   // std::vector
 #include <string>   // std::string
@@ -17,6 +16,7 @@ int main()
     for (std::string &x : myvector)
         std::cout << ' ' << x;
     std::cout << '\n';
+    
     std::cout << bar << std::endl;
     
     return 0;

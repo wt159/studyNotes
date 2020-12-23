@@ -49,7 +49,6 @@ int main(void)
     demo b = c;
     demo c1(std::move(c));      //移动构造函数
 
-    //cout << "c:" << c.getNum() << endl;
-
+    cout << "c:" << c.getNum() << endl;
     return 0;
 }
