@@ -1,3 +1,6 @@
+#ifndef _COLORPRI_H_
+#define __COLORPRI_H_
+
 #include <stdio.h>
 
 /* printf("\033[字背景颜色;字体颜色m字符串\033[0m" );
@@ -74,12 +77,18 @@
 #define LOGW(fmt, ...) {printf(YELLOW);printf("\r [WARINING] [%s]:[%s]: %d ",__FILE__, __FUNCTION__, __LINE__);\
                                 printf(fmt, ##__VA_ARGS__);\
                                 printf(NONE"\n");}
+#define LOGD(fmt, ...) {printf(LIGHT_PURPLE);printf("\r [DEBUG] [%s]:[%s]: %d ",__FILE__, __FUNCTION__, __LINE__);\
+                                printf(fmt, ##__VA_ARGS__);\
+                                printf(NONE"\n");}
 
-
-int main(void)
+int test(void)
 {
     LOGE("zhangJun is a pig %d", 2);
     LOGI("zhangJun is a pig");
     LOGW("zhangJun is a pig");
+    LOGD("zhangJun is a pig");
 	return 0;
 }
+
+
+#endif // !_COLORPRI_H_
