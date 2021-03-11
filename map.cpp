@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <stack>
 using namespace std;
 #include <map>
 typedef std::map<std::string, int> maptype;
@@ -34,17 +35,42 @@ public:
         }
 		return {};
     }
+	string reverseWords(string s) {
+        std::stack<std::string> mystack;
+		cout << s << "\n";
+        string temp;
+        temp.clear();
+        for(int i = 0; i < s.size(); i++){
+            if((s[i] >= 'A' && s[i] <= 'Z') || 
+			   (s[i] >= 'a' && s[i] <= 'z') || 
+			                (s[i] == ',') || s[i] == '.' || s[i] == '!'){
+                temp += s[i];
+            }
+            else {
+                if(!temp.empty()){
+                    mystack.push(temp);
+                    temp.clear();
+                }
+            }
+        }
+        if(!temp.empty()){
+            mystack.push(temp);
+            temp.clear();
+        }
+        while(mystack.size()){
+            temp += mystack.top();
+            mystack.pop();
+         	temp += ' ';
+        }
+        return temp;
+    }
 };
 
 int main(void)
 {
 	Solution test;
-	vector<int> a = {2, 7, 11, 15};
-	vector<int> b = test.twoSum(a, 22);
-
-	for(auto s : b)
-		cout << s << " ";
-	cout << endl;
+	string str = "this is a pig!";
+	cout << test.reverseWords(str) << " \n";
 
 	return 0;
 }
